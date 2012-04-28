@@ -2,7 +2,7 @@ NoAFK
 =====
 Purpose
 -------
-A simple script to keep a player from going into AFK mode in Minecraft. Useful for collecting items from automated farms, mob spawners, chicken farms and other such automatic item producing constructions in Minecraft. Also useful for servers that ban/kick players that go AFK.
+This simple script is just to keep a player from going into AFK mode in Minecraft. It's useful for collecting items from automated farms, mob spawners, chicken farms, and other such automatic item producing constructions in Minecraft, and also for servers that ban/kick players that go AFK.
 
 Features
 --------
