@@ -3,22 +3,24 @@
 #   auxiliary-character's Minecraft No-afk script
 
 # Bugs/Notes: 
-#   xdotool needs to be installed. 
-#   Minecraft window needs to be focused.
+#   xdotool needs to be installed.
+#   Wierd stdio and stderror output.
 
 verbose=
 inwater=
 text=
+interval="60s"
 
 #Grab arguments
-while getopts 'wvt:' FLAG
+while getopts 'wvt:i:' FLAG
 do
    case $FLAG in
    v)   verbose=1;;
    w)   inwater=1;;
    t)   text=1
         textval="$OPTARG";;
-   ?)   echo "Usage: $0 [-w] [-v]"
+   i)   interval="$OPTARG";;
+   ?)   echo "Usage: $0 [-w | -t text] [-v] [-i interval]"
         exit 2;
    esac
 done
@@ -35,7 +37,7 @@ if [ "$verbose" ]; then
    echo "Switching to Minecraft"
 fi
 eval $(xdotool windowactivate $minecraftwindowid)
-eval $(xdotool getmouselocation --shell)
+eval $(xdotool getmouselocation --shell) 
 minecraftwindow=$WINDOW
 sleep .5s
 xdotool key Escape
@@ -55,7 +57,7 @@ if [ "$text" ]; then
          xdotool type "$textval"
          #Exit Chat
          xdotool key Return
-         sleep 30s
+         sleep $interval
          eval $(xdotool getmouselocation --shell)
       done
 
@@ -71,7 +73,7 @@ elif [ "$inwater" ]; then
           sleep 1.5s
           #Flow Downstream
           xdotool keyup W
-          sleep 30s
+          sleep $interval
           eval $(xdotool getmouselocation --shell)
       done
 
@@ -90,7 +92,9 @@ else
          xdotool keydown s
          sleep .3s
          xdotool keyup s
-         sleep 30s
+         sleep $interval
          eval $(xdotool getmouselocation --shell)
       done
 fi
+echo "Done."
+
