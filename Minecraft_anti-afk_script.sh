@@ -7,16 +7,45 @@
 #   Minecraft window needs to be focused.
 #   Assumes you are standing in a backwards flowing pool of water.
 
-sleep 5 
-#Wait for you to switch the window
+verbose=
+inwater=
+while getopts 'wv' FLAG        #Grab arguments
+do
+   case $FLAG in
+   v)   verbose=1;;
+   w)   inwater=1;;
+   ?)   echo "Usage: $0 [-w] [-v]"
+           exit 2;
+   esac
+done
 
-while [ 1 ]
-   do
-         xdotool keydown w   #Start walking forward
-         sleep 3s            #Wait until you walk forward enough
-         xdotool keyup w     
-         xdotool keydown s
-         sleep 3s
-         xdotool keyup s
-         sleep 30s           #Wait until the next cycle
-   done 
+echo "Switch to Minecraft."    #Wait for user to put the Minecraft Window in focus.
+sleep 5 
+
+if [ "$inwater" ]; then
+   if [ "$verbose" ]; then
+      echo "Water mode engaged"
+   fi
+   while [ 1 ]
+      do          
+            xdotool keydown w  #Walk upstream
+            sleep 1.5s
+            xdotool keyup w    #Flow Downstream
+            sleep 30s
+      done
+else 
+   if [ "$verbose" ]; then
+      echo "Normal Mode engaged"
+   fi
+   while [ 1 ]
+      do
+            xdotool keydown w  #Walk forward
+            sleep .3s          
+            xdotool keyup w     
+            xdotool keydown s  #Walk backward
+            sleep .3s
+            xdotool keyup s
+            sleep 30s
+      done
+fi
+
