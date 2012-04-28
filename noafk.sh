@@ -19,7 +19,9 @@ do
 done
 
 minecraftwindowid=$(xwininfo -name "Minecraft" | grep "Window id" | awk '{print $4}') 
-echo "Switching to Minecraft"
+if [ "$verbose" ]; then
+   echo "Switching to Minecraft"
+fi
 xdotool windowactivate $minecraftwindowid
 sleep 1s
 xdotool key Escape
