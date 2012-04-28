@@ -6,8 +6,8 @@ A simple script to keep a player from going into AFK mode in Minecraft. Useful f
 
 Features
 --------
-    *Walking back & forth
-    *Walking into and flowing back down water
-    *Typing a string repetetively into the chat
-    *User definable interval
-    *Automatic switching to Minecraft Client
+    * Walking back & forth
+    * Walking into and flowing back down water
+    * Typing a string repetetively into the chat
+    * User definable interval
+    * Automatic switching to Minecraft Client
