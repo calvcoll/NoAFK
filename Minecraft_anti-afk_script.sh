@@ -14,6 +14,9 @@ while [ 1 ]
    do
          xdotool keydown w   #Start walking forward
          sleep 3s            #Wait until you walk forward enough
-         xdotool keyup w     #Let the water take you back
+         xdotool keyup w     
+         xdotool keydown s
+         sleep 3s
+         xdotool keyup s
          sleep 30s           #Wait until the next cycle
    done 
