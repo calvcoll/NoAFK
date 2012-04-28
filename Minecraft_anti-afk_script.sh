@@ -10,7 +10,6 @@
 sleep 5
 while [ 1 ]
    do
-      echo $b
          xdotool keydown w
          sleep 3s
          xdotool keyup w
