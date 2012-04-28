@@ -2,7 +2,7 @@
 
 #   auxiliary-character's Minecraft No-afk script
 
-# Busg/Notes: 
+# Bugs/Notes: 
 #   xdotool needs to be installed. 
 #   Minecraft window needs to be focused.
 #   Assumes you are standing in a backwards flowing pool of water.
