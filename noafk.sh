@@ -6,30 +6,24 @@
 #   xdotool needs to be installed.
 #   Wierd stdio and stderror output.
 
-verbose=
-inwater=
-text=
+mode="Normal"
 interval="60s"
+verbose=
 
 #Grab arguments
-while getopts 'wvt:i:' FLAG
+while getopts 'bwvt:i:' FLAG
 do
    case $FLAG in
    v)   verbose=1;;
-   w)   inwater=1;;
-   t)   text=1
+   w)   mode="water";;
+   t)   mode="text"
         textval="$OPTARG";;
+   b)   mode="button";;
    i)   interval="$OPTARG";;
-   ?)   echo "Usage: $0 [-w | -t text] [-v] [-i interval]"
+   ?)   echo "Usage: $0 [-w | -b | -t text] [-v] [-i interval]"
         exit 2;
    esac
 done
-
-#A bit of error handeling
-if [ "$inwater" ] && [ "$text" ]; then
-   echo "You can't use both of those flags, silly."
-   exit 2
-fi
 
 #Find the Minecraft Window and switch to it
 minecraftwindowid=$(xwininfo -name "Minecraft" | grep "Window id" | awk '{print $4}') 
@@ -44,14 +38,14 @@ xdotool key Escape
 sleep .5s
 
 #Text Entry mode
-if [ "$text" ]; then
+if [[ "$mode" == "text" ]]; then
    if [ "$verbose" ]; then
       echo "Text entry mode engaged."
    fi
    while [[ "$WINDOW" == "$minecraftwindow" ]]
       do
          #Open chat
-         xdotool key T
+         xdotool key t
          sleep .1s
          #Type payload
          xdotool type "$textval"
@@ -61,18 +55,30 @@ if [ "$text" ]; then
          eval $(xdotool getmouselocation --shell)
       done
 
+#Button mode
+elif [[ "$mode" == "button" ]]; then
+   if [ "$verbose" ]; then
+      echo "Button mode engaged"
+   fi
+   while [[ "$WINDOW" == "$minecraftwindow" ]]
+      do
+         xdotool click 3
+         sleep $interval
+         eval $(xdotool getmouselocation --shell)
+      done
+
 #Water Mode
-elif [ "$inwater" ]; then
+elif [[ "$mode" == "water" ]]; then
    if [ "$verbose" ]; then
       echo "Water mode engaged."
    fi
    while [[ "$WINDOW" == "$minecraftwindow" ]]
       do
           #Walk Upstream
-          xdotool keydown W
+          xdotool keydown w
           sleep 1.5s
           #Flow Downstream
-          xdotool keyup W
+          xdotool keyup w
           sleep $interval
           eval $(xdotool getmouselocation --shell)
       done
