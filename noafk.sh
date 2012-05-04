@@ -31,8 +31,6 @@ if [ "$verbose" ]; then
    echo "Switching to Minecraft"
 fi
 eval $(xdotool windowactivate $minecraftwindowid)
-eval $(xdotool getmouselocation --shell) 
-minecraftwindow=$WINDOW
 sleep .5s
 xdotool key Escape
 sleep .5s
@@ -42,7 +40,7 @@ if [[ "$mode" == "text" ]]; then
    if [ "$verbose" ]; then
       echo "Text entry mode engaged."
    fi
-   while [[ "$WINDOW" == "$minecraftwindow" ]]
+   while [ 1 ]
       do
          #Open chat
          xdotool key t
@@ -52,7 +50,6 @@ if [[ "$mode" == "text" ]]; then
          #Exit Chat
          xdotool key Return
          sleep $interval
-         eval $(xdotool getmouselocation --shell)
       done
 
 #Button mode
@@ -60,11 +57,12 @@ elif [[ "$mode" == "button" ]]; then
    if [ "$verbose" ]; then
       echo "Button mode engaged"
    fi
-   while [[ "$WINDOW" == "$minecraftwindow" ]]
+   while [ 1 ]
       do
          xdotool click 3
+         sleep .1
+         xdotool click 3
          sleep $interval
-         eval $(xdotool getmouselocation --shell)
       done
 
 #Water Mode
@@ -72,7 +70,7 @@ elif [[ "$mode" == "water" ]]; then
    if [ "$verbose" ]; then
       echo "Water mode engaged."
    fi
-   while [[ "$WINDOW" == "$minecraftwindow" ]]
+   while [ 1 ]
       do
           #Walk Upstream
           xdotool keydown w
@@ -80,7 +78,6 @@ elif [[ "$mode" == "water" ]]; then
           #Flow Downstream
           xdotool keyup w
           sleep $interval
-          eval $(xdotool getmouselocation --shell)
       done
 
 #Normal mode
@@ -88,7 +85,7 @@ else
    if [ "$verbose" ]; then
       echo "Normal Mode engaged."
    fi
-   while [[ "$WINDOW" == "$minecraftwindow" ]]
+   while [ 1 ]
       do
          #Walk Forward
          xdotool keydown w
@@ -99,7 +96,6 @@ else
          sleep .3s
          xdotool keyup s
          sleep $interval
-         eval $(xdotool getmouselocation --shell)
       done
 fi
 echo "Done."
