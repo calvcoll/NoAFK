@@ -8,6 +8,6 @@ Features
 --------
 * Walking back & forth
 * Walking into and flowing back down water
-* Typing a string repetetively into the chat
+* Typing a string repetetively into the chat (Such as "/ping")
 * User definable interval
 * Automatic switching to Minecraft Client
