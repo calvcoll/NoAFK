@@ -29,7 +29,6 @@ done
 minecraftwindowid=$(xwininfo -name "Minecraft" | grep "Window id" | awk '{print $4}') 
 case "${#minecraftwindowid}" in
  0 ) echo "Minecraft not open!"; exit 1;;
- *) echo $minecraftwindowid;;
 esac
 if [ "$verbose" ]; then
    echo "Switching to Minecraft"
