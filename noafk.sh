@@ -25,6 +25,12 @@ do
    esac
 done
 
+if [ ! -f "/usr/bin/xdotool" ]; then
+   echo "xdotool is not installed!"
+   echo "Run sudo apt-get install xdotool for this tool to work!"
+   exit 1
+fi
+
 #Find the Minecraft Window and switch to it
 minecraftwindowid=$(xwininfo -name "Minecraft" | grep "Window id" | awk '{print $4}') 
 case "${#minecraftwindowid}" in
