@@ -27,7 +27,6 @@ done
 
 if [ ! -f "/usr/bin/xdotool" ]; then
    echo "xdotool is not installed!"
-   echo "Run sudo apt-get install xdotool for this tool to work!"
    exit 1
 fi
 
