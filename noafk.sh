@@ -25,6 +25,7 @@ do
    esac
 done
 
+#Checks for xdotool, if it isn't installed the program warns user and closes
 if [ ! -f "/usr/bin/xdotool" ]; then
    echo "xdotool is not installed!"
    exit 1
@@ -32,6 +33,7 @@ fi
 
 #Find the Minecraft Window and switch to it
 minecraftwindowid=$(xwininfo -name "Minecraft" | grep "Window id" | awk '{print $4}') 
+#If the Minecraft Window is not open, the script will close
 case "${#minecraftwindowid}" in
  0 ) echo "Minecraft not open!"; exit 1;;
 esac
