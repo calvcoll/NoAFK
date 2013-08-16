@@ -27,10 +27,12 @@ done
 
 #Checks for xdotool, if it isn't installed the program warns user and closes
 if [ ! -f "/usr/bin/xdotool" ]; then
-   echo "xdotool is not installed!"
+   #Checks for the program using hash (if exits successfully - command exists)
    if hash apt-get 2>/dev/null; then
+       echo "xdotool is not installed!"
        echo "Use '[sudo] apt-get install xdotool' to install!"
    elif hash yum 2>/dev/null; then
+       echo "xdotool is not installed!"       
        echo "Use '[sudo] yum install xdotool' to install!"
    elif [ $(uname -s) == Darwin ]; then
        echo "We have detected you're using a Mac!"
