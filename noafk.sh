@@ -37,6 +37,9 @@ if [ ! -f "/usr/bin/xdotool" ]; then
    elif [ $(uname -s) == Darwin ]; then
        echo "We have detected you're using a Mac!"
        echo "You need a Linux computer to use this :("
+   else
+       echo "We couldn't detect your package manager. :("
+       echo "xdotool is not installed!"
    fi
    exit 1
 fi
