@@ -31,6 +31,9 @@ if [ ! -f "/usr/bin/xdotool" ]; then
    if hash apt-get 2>/dev/null; then
        echo "xdotool is not installed!"
        echo "Use '[sudo] apt-get install xdotool' to install!"
+   elif hash pacman 2>/dev/null; then
+       echo "xdotool is not installed!"
+       echo "Use '[sudo] pacman -S xdotool' to install!"
    elif hash yum 2>/dev/null; then
        echo "xdotool is not installed!"       
        echo "Use '[sudo] yum install xdotool' to install!"
